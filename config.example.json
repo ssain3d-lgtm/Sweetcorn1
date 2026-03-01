@@ -1,0 +1,23 @@
+{
+  "telegram_token": "YOUR_TELEGRAM_BOT_TOKEN_HERE",
+  "ollama_url": "http://localhost:11434",
+  "model": "huihui_ai/exaone3.5-abliterated:7.8b",
+  "fallback_model": "dolphin-mistral-nemo:12b",
+  "default_character": "hana",
+  "keep_alive": "30m",
+  "max_history": 50,
+  "temperature": 0.65,
+  "top_p": 0.88,
+  "max_tokens": 512,
+  "nsfw_mode": true,
+  "age_verification": true,
+  "comfyui_url": "http://localhost:8188",
+  "comfyui_enabled": true,
+  "comfyui_timeout": 60,
+  "comfyui_poll_interval": 2,
+  "db_path": "database/gf_bot.db",
+  "log_file": "logs/bot.log",
+  "morning_greeting_hour": 8,
+  "night_greeting_hour": 23,
+  "absence_alert_hours": 24
+}
