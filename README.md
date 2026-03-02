@@ -27,7 +27,7 @@ setup.bat
 # https://ollama.ai 에서 다운로드
 
 # 2. 권장 모델 다운로드
-ollama pull qwen3:14b
+ollama pull huihui_ai/exaone3.5-abliterated:7.8b
 
 # 3. Ollama 서버 실행
 ollama serve
