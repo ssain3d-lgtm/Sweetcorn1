@@ -27,10 +27,11 @@ class OllamaClient:
         messages: List[Dict[str, str]],
         system_prompt: Optional[str] = None,
         temperature: float = 0.7,
-        top_p: float = 0.9
+        top_p: float = 0.9,
+        num_predict: int = 250
     ) -> AsyncGenerator[str, None]:
         """Stream chat response from Ollama"""
-        
+
         # Prepare messages with system prompt
         formatted_messages = messages.copy()
         if system_prompt:
@@ -45,19 +46,21 @@ class OllamaClient:
             "options": {
                 "temperature": temperature,
                 "top_p": top_p,
-                "num_predict": 250,       # 7.8B — 카톡 스타일 단문
-                "repeat_penalty": 1.15,   # 반복 억제 (너무 높으면 garbage)
+                "num_predict": num_predict,   # arousal별 동적 조절 (bot.py에서 전달)
+                "repeat_penalty": 1.15,       # 반복 억제 (너무 높으면 garbage)
                 "repeat_last_n": 256,
-                "frequency_penalty": 0.1, # 낮게 유지 (높으면 7.8B가 garbage 생성)
-                "presence_penalty": 0.0,  # 비활성화 (7.8B 소형 모델에 위험)
+                "frequency_penalty": 0.1,     # 낮게 유지 (높으면 7.8B가 garbage 생성)
+                "presence_penalty": 0.0,      # 비활성화 (7.8B 소형 모델에 위험)
                 "top_k": 40,
                 "min_p": 0.05,
-                "stop": [                 # EOS 폭발 방지 (필수 패턴만)
+                "stop": [                     # EOS 폭발 방지
                     "\n\n\n",
                     "User:",
                     "Assistant:",
                     "사용자:",
-                    "하나:"
+                    "하나:",
+                    "Lee ",        # 영문 이름 단독 등장 차단 (garbage 방지)
+                    "Daeseung",    # 유저 실명 garbage 방지
                 ]
             }
         }
